@@ -1,11 +1,11 @@
 import java.util.Arrays;
 
-public class parenErrorCheckOptimize {
+public class parenErrorCheck {
     String stringForCheck;
     String[] openParens = {"(", "[", "{"};
     String[] closeParens = {")", "]", "}"};
 
-    public parenErrorCheckOptimize(String stringForCheck) {
+    public parenErrorCheck(String stringForCheck) {
         this.stringForCheck = stringForCheck;
     }
 
