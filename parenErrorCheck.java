@@ -1,20 +1,18 @@
-import java.util.Arrays;
-
 public class parenErrorCheck {
     String stringForCheck;
-    String[] openParens = {"(", "[", "{"};
-    String[] closeParens = {")", "]", "}"};
+    String openParens = "([{";
+    String closeParens = "}])";
 
     public parenErrorCheck(String stringForCheck) {
         this.stringForCheck = stringForCheck;
     }
 
     private boolean inOpenParens(char current) {
-        return Arrays.stream(openParens).toList().contains(current);
+        return openParens.indexOf(current) != -1;
     }
 
     private boolean inCloseParens(char current) {
-        return Arrays.stream(closeParens).toList().contains(current);
+        return closeParens.indexOf(current) != -1;
     }
 
     public boolean check() {
@@ -27,11 +25,13 @@ public class parenErrorCheck {
             if (current == '"') {
                 inString = !inString;
             }
-            
-            if (inOpenParens(current) && inString) {
+
+            if (inOpenParens(current) && !inString) {
                 parensNumber++;
-            } else if (inCloseParens(current) && inString) {
+
+            } else if (inCloseParens(current) && !inString) {
                 parensNumber = parensNumber - 1;
+                
                 if (parensNumber < 0) {
                     return false;
                 }
