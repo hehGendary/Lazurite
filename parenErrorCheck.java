@@ -19,13 +19,18 @@ public class parenErrorCheck {
 
     public boolean check() {
         int parensNumber = 0;
+        boolean inString = false;
 
         for (int pos = 0; pos < stringForCheck.length(); pos++) {
             char current = stringForCheck.charAt(pos);
 
-            if (inOpenParens(current)) {
+            if (current == '"') {
+                inString = !inString;
+            }
+            
+            if (inOpenParens(current) && inString) {
                 parensNumber++;
-            } else if (inCloseParens(current)) {
+            } else if (inCloseParens(current) && inString) {
                 parensNumber = parensNumber - 1;
                 if (parensNumber < 0) {
                     return false;
